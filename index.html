@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Análisis de Datos</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <div class="page-container">
+      <header>
+        <h1>Análisis de Datos</h1>
+        <div class="header-buttons">
+        <button id="btn-modal-1">Ver Tabla 1</button>
+          <button id="btn-modal-2">Ver Tabla 2</button>
+          <button id="btn-modal-3">Ver Tabla 3</button>
+        </div>
+      </header>
+      <main>
+        <div class="input-section">
+          <h2>Factor de multiplicación</h2>
+          <input
+            type="number"
+            value="10"
+            id="data-input"
+            title="factor de multiplicacion"
+            required
+          />
+        </div>
+        <section class="charts-section">
+          <div class="chart-container">
+            <canvas id="y-normalized"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-2"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-3"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-4"></canvas>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>devs: camilo y juan</p>
+        <p>&copy; 2025</p>
+      </footer>
+    </div>
+    <dialog id="modal-1" class="modal">
+      <div class="modal-content">
+        <h2>Tabla 1</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Columna A</th>
+              <th>Columna B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dato 1</td>
+              <td>Dato 2</td>
+            </tr>
+            <tr>
+              <td>Dato 3</td>
+              <td>Dato 4</td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="close-modal-btn">Cerrar</button>
+      </div>
+    </dialog>
+    <dialog id="modal-2" class="modal">
+      <div class="modal-content">
+        <h2>Tabla 2</h2>
+        <table></table>
+        <button class="close-modal-btn">Cerrar</button>
+      </div>
+    </dialog>
+    <dialog id="modal-3" class="modal">
+      <div class="modal-content">
+        <h2>Tabla 3</h2>
+        <table></table>
+        <button class="close-modal-btn">Cerrar</button>
+      </div>
+    </dialog>
+  </body>
+</html>
