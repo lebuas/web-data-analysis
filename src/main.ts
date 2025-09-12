@@ -1,3 +1,4 @@
+/* estudiantes: Leymar Buenaventura, Jose David Peña, Juan Sebastian Beron */
 import "../src/style.css";
 import { createChart, type ChartDataset } from "./charts";
 import * as getData from "./get-data";
@@ -114,5 +115,14 @@ const closeBtn = document.querySelectorAll(
 closeBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
     currentDialog.close();
+  });
+});
+
+const modals = document.querySelectorAll(".modal") as NodeListOf<HTMLDialogElement>;
+modals.forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.close();
+    }
   });
 });

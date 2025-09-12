@@ -1,3 +1,4 @@
+/* estudiantes: Leymar Buenaventura, Jose David Peña, Juan Sebastian Beron */
 export type Data = { [key: number]: number[] };
 type xy = {
   xa: number[];

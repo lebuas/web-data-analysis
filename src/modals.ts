@@ -1,3 +1,4 @@
+/* estudiantes: Leymar Buenaventura, Jose David Peña, Juan Sebastian Beron */
 export function showModal(idModal: string, tableData: any): HTMLDialogElement {
   const dialog = document.getElementById(idModal) as HTMLDialogElement;
 
@@ -60,6 +61,7 @@ export function showModal(idModal: string, tableData: any): HTMLDialogElement {
     dialog.show();
   }
 
+  dialog.scrollTop = 0;
+
   return dialog;
 }
-

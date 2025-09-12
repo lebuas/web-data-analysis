@@ -1,3 +1,4 @@
+/* estudiantes: Leymar Buenaventura, Jose David Peña, Juan Sebastian Beron */
 :root {
   --bg-color: #151a28;
   --text-color: #333333;
@@ -132,7 +133,7 @@ main {
 }
 .modal th {
   background-color: var(--header-bg);
-  color: var(--bg-color);
+  color: white;
 }
 .close-modal-btn {
   align-self: flex-end;

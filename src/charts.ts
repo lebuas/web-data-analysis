@@ -1,3 +1,4 @@
+/* estudiantes: Leymar Buenaventura, Jose David Peña, Juan Sebastian Beron */
 import {
   Chart,
   registerables,
