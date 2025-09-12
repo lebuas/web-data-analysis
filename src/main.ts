@@ -5,14 +5,14 @@ import { showModal } from "./modals";
 
 let currentDialog: HTMLDialogElement;
 interface DataTables {
-  T1: getData.Data;
-  T2: number[];
-  T3: number[];
+  VerTabla1: getData.Data;
+  VerTala2: number[];
+  VerTala3: number[];
 }
-const dataTables: DataTables = {
-  T1: {},
-  T2: [],
-  T3: [],
+const currentTable: DataTables = {
+  VerTabla1: [],
+  VerTala2: [],
+  VerTala3: [],
 };
 
 // Envuelve la lógica en el evento 'DOMContentLoaded' para asegurar que el HTML está listo
@@ -56,7 +56,7 @@ function main(fm: number) {
 
   console.log(dataTable);
 
-  dataTables.T1 = dataTable;
+  currentTable.VerTabla1 = dataTable;
   // dataTables.T2 = dataTable[2];
   // dataTables.T3 = dataTable[3];
   //
@@ -105,7 +105,8 @@ buttonsOpoen.forEach((btn) => {
     const nameBotton = btn.lastChild?.nodeValue?.split(" ").join("");
     if (nameBotton && dataTable.hasOwnProperty(nameBotton)) {
       const modalId = dataTable[nameBotton as keyof typeof dataTable];
-      currentDialog = showModal(modalId);
+      const keyTable: string = modalId;
+      currentDialog = showModal(modalId, curr);
     }
   });
 });
