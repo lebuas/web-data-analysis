@@ -1,4 +1,4 @@
-type Data = { [key: number]: number[] };
+export type Data = { [key: number]: number[] };
 type xy = {
   xa: number[];
   xb: number[];

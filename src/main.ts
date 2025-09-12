@@ -5,11 +5,15 @@ import { showModal } from "./modals";
 
 let currentDialog: HTMLDialogElement;
 interface DataTables {
-  T1: { number: number[] };
+  T1: getData.Data;
   T2: number[];
   T3: number[];
 }
-const dataTables: DataTables = {};
+const dataTables: DataTables = {
+  T1: {},
+  T2: [],
+  T3: [],
+};
 
 // Envuelve la lógica en el evento 'DOMContentLoaded' para asegurar que el HTML está listo
 document.addEventListener("DOMContentLoaded", () => {
@@ -51,8 +55,8 @@ function main(fm: number) {
   const dataAvarages2 = getData.xyAverage(valuesXYNormalized, divisor2);
 
   console.log(dataTable);
-  //
-  // dataTables.T1 = dataTable;
+
+  dataTables.T1 = dataTable;
   // dataTables.T2 = dataTable[2];
   // dataTables.T3 = dataTable[3];
   //
