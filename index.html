@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Análisis de Datos</title>
     <link rel="stylesheet" href="/src/style.css" />
-    <script type="module" src="/src/main.ts" defer></script>
+    <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
     <div class="page-container">
       <header>
         <h1>Análisis de Datos</h1>
         <div class="header-buttons">
-        <button id="btn-modal-1">Ver Tabla 1</button>
-          <button id="btn-modal-2">Ver Tabla 2</button>
-          <button id="btn-modal-3">Ver Tabla 3</button>
+          <button class="btn-modal">Ver Tabla 1</button>
+          <button class="btn-modal">Ver Tabla 2</button>
+          <button class="btn-modal">Ver Tabla 3</button>
         </div>
       </header>
       <main>
@@ -33,10 +33,10 @@
             <canvas id="y-normalized"></canvas>
           </div>
           <div class="chart-container">
-            <canvas id="chart-2"></canvas>
+            <canvas id="y-average1"></canvas>
           </div>
           <div class="chart-container">
-            <canvas id="chart-3"></canvas>
+            <canvas id="y-average2"></canvas>
           </div>
           <div class="chart-container">
             <canvas id="chart-4"></canvas>
@@ -49,25 +49,20 @@
       </footer>
     </div>
     <dialog id="modal-1" class="modal">
-      <div class="modal-content">
-        <h2>Tabla 1</h2>
+      <div>
         <table>
           <thead>
             <tr>
-              <th>Columna A</th>
-              <th>Columna B</th>
+              <th>X</th>
+              <th>Y1</th>
+              <th>Y2</th>
+              <th>Y3</th>
+              <th>Y4</th>
+              <th>Y5</th>
+              <th>Y6</th>
+              <th>Y7</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Dato 1</td>
-              <td>Dato 2</td>
-            </tr>
-            <tr>
-              <td>Dato 3</td>
-              <td>Dato 4</td>
-            </tr>
-          </tbody>
         </table>
         <button class="close-modal-btn">Cerrar</button>
       </div>
@@ -88,3 +83,5 @@
     </dialog>
   </body>
 </html>
+
+>

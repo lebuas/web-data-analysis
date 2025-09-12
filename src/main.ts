@@ -1,6 +1,15 @@
-import "./style.css";
-import { createChart } from "./charts";
+import "../src/style.css";
+import { createChart, type ChartDataset } from "./charts";
 import * as getData from "./get-data";
+import { showModal } from "./modals";
+
+let currentDialog: HTMLDialogElement;
+interface DataTables {
+  T1: { number: number[] };
+  T2: number[];
+  T3: number[];
+}
+const dataTables: DataTables = {};
 
 // Envuelve la lógica en el evento 'DOMContentLoaded' para asegurar que el HTML está listo
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,26 +31,86 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function main(fm: number) {
+  const dividor1 = 10;
+  const divisor2 = 20;
+  const idNormalized: string = "y-normalized";
+  const idAverage1: string = "y-average1";
+  const idaVerage2: string = "y-average2";
+  const idAllGraph: string = "chart-4";
+
+  // Obtener datos
   const coefficient = getData.generateCoefficients(fm);
-  const [dataTable, ySumatoria] = getData.generateDataTable(coefficient);
-  const valuesMaxMin = getData.getMaxMin(ySumatoria);
+  const { dataTable, sumY } = getData.generateDataTable(coefficient);
+  const valuesMaxMin = getData.getMaxMin(sumY);
   const valuesXYNormalized = getData.normalizedXY(
-    ySumatoria,
+    sumY,
     valuesMaxMin.yMax,
     valuesMaxMin.yMin,
   );
+  const dataAvarages = getData.xyAverage(valuesXYNormalized, dividor1);
+  const dataAvarages2 = getData.xyAverage(valuesXYNormalized, divisor2);
 
-  dataGraphNormalized(valuesXYNormalized);
+  console.log(dataTable);
+  //
+  // dataTables.T1 = dataTable;
+  // dataTables.T2 = dataTable[2];
+  // dataTables.T3 = dataTable[3];
+  //
+
+  const dataNormalized: ChartDataset = {
+    label: "Y Normalizado",
+    xValues: valuesXYNormalized.xNormalized,
+    yValues: valuesXYNormalized.yNormalized,
+    borderColor: "black",
+  };
+
+  const dataAverage1: ChartDataset = {
+    label: "Y Promedio",
+    xValues: dataAvarages.xa,
+    yValues: dataAvarages.yAverage,
+    borderColor: "red",
+  };
+
+  const dataAverage2: ChartDataset = {
+    label: "Y Promedio",
+    xValues: dataAvarages2.xa,
+    yValues: dataAvarages2.yAverage,
+    borderColor: "green",
+  };
+
+  //Crar las graficas
+  createChart(idNormalized, [dataNormalized]);
+  createChart(idAverage1, [dataAverage1]);
+  createChart(idaVerage2, [dataAverage2]);
+  createChart(idAllGraph, [dataNormalized, dataAverage1, dataAverage2]);
 }
 
-// prettier-ignore
-export const dataGraphNormalized = (param: {xNormalized: number[], yNormalized: number[]}) => {
-  createChart("y-normalized", [
-    {
-      label: " Y Normalizado",
-      xValues: param.xNormalized,
-      yValues: param.yNormalized,
-      borderColor: "blue",
-    },
-  ]);
+const dataTable = {
+  VerTabla1: "modal-1",
+  VerTabla2: "modal-2",
+  VerTabla3: "modal-3",
 };
+
+//Lamada de los modales
+const buttonsOpoen = document.querySelectorAll(
+  ".btn-modal",
+) as NodeListOf<HTMLButtonElement>;
+
+buttonsOpoen.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const nameBotton = btn.lastChild?.nodeValue?.split(" ").join("");
+    if (nameBotton && dataTable.hasOwnProperty(nameBotton)) {
+      const modalId = dataTable[nameBotton as keyof typeof dataTable];
+      currentDialog = showModal(modalId);
+    }
+  });
+});
+
+const closeBtn = document.querySelectorAll(
+  ".close-modal-btn",
+) as NodeListOf<HTMLButtonElement>;
+closeBtn.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentDialog.close();
+  });
+});
