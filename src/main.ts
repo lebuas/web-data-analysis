@@ -6,13 +6,13 @@ import { showModal } from "./modals";
 let currentDialog: HTMLDialogElement;
 interface DataTables {
   VerTabla1: getData.Data;
-  VerTala2: number[];
-  VerTala3: number[];
+  VerTabla2: Object;
+  VerTabla3: Object;
 }
-const currentTable: DataTables = {
+const currenTable: DataTables = {
   VerTabla1: [],
-  VerTala2: [],
-  VerTala3: [],
+  VerTabla2: [],
+  VerTabla3: [],
 };
 
 // Envuelve la lógica en el evento 'DOMContentLoaded' para asegurar que el HTML está listo
@@ -54,12 +54,9 @@ function main(fm: number) {
   const dataAvarages = getData.xyAverage(valuesXYNormalized, dividor1);
   const dataAvarages2 = getData.xyAverage(valuesXYNormalized, divisor2);
 
-  console.log(dataTable);
-
-  currentTable.VerTabla1 = dataTable;
-  // dataTables.T2 = dataTable[2];
-  // dataTables.T3 = dataTable[3];
-  //
+  currenTable.VerTabla1 = dataTable;
+  currenTable.VerTabla2 = dataAvarages;
+  currenTable.VerTabla3 = dataAvarages2;
 
   const dataNormalized: ChartDataset = {
     label: "Y Normalizado",
@@ -99,14 +96,14 @@ const dataTable = {
 const buttonsOpoen = document.querySelectorAll(
   ".btn-modal",
 ) as NodeListOf<HTMLButtonElement>;
-
+type CurrenTable = keyof typeof currenTable;
 buttonsOpoen.forEach((btn) => {
   btn.addEventListener("click", () => {
     const nameBotton = btn.lastChild?.nodeValue?.split(" ").join("");
     if (nameBotton && dataTable.hasOwnProperty(nameBotton)) {
       const modalId = dataTable[nameBotton as keyof typeof dataTable];
-      const keyTable: string = modalId;
-      currentDialog = showModal(modalId, curr);
+      const tablekey = nameBotton as CurrenTable;
+      currentDialog = showModal(modalId, currenTable[tablekey]);
     }
   });
 });
