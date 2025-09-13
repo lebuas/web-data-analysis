@@ -12,7 +12,7 @@ export function showModal(idModal: string, tableData: any): HTMLDialogElement {
   tbody = document.createElement("tbody");
 
   // Detectamos tipo de datos
-  if (idModal === "modal-1") {
+  if (idModal === "modal-1" || idModal === "modal-4") {
     // --- Tabla de dataTable ---
     // tableData = { [y: number]: number[] }
     const numCols = Object.keys(tableData).length; // debería ser 7
@@ -32,23 +32,29 @@ export function showModal(idModal: string, tableData: any): HTMLDialogElement {
       }
       tbody.appendChild(tr);
     }
-  } else if (idModal === "modal-2" || idModal === "modal-3") {
-    // --- Tablas de promedios ---
-    // tableData = { xa: number[], xb: number[], xMidpoint: number[], yAverage: number[] }
+  } else if (
+    idModal === "modal-2" ||
+    idModal === "modal-3" ||
+    idModal === "modal-5"
+  ) {
+    // --- Tablas de promedios genéricas ---
+    const columns = Object.keys(tableData); // detecta nombres de columnas
+    const numRows = tableData[columns[0]].length; // asumimos arrays de igual longitud
 
-    for (let i = 0; i < tableData.xa.length; i++) {
+    for (let i = 0; i < numRows; i++) {
       const tr = document.createElement("tr");
-      // columnas en orden
-      [
-        tableData.xa[i],
-        tableData.xb[i],
-        tableData.xMidpoint[i],
-        tableData.yAverage[i],
-      ].forEach((value) => {
+
+      columns.forEach((col) => {
         const td = document.createElement("td");
-        td.textContent = value.toFixed(4);
+        const value = tableData[col][i];
+
+        // Si es número, formateamos; si no, solo texto
+        td.textContent =
+          typeof value === "number" ? value.toFixed(4) : String(value);
+
         tr.appendChild(td);
       });
+
       tbody.appendChild(tr);
     }
   }

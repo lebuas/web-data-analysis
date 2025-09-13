@@ -6,14 +6,18 @@ import { showModal } from "./modals";
 
 let currentDialog: HTMLDialogElement;
 interface DataTables {
-  VerTabla1: getData.Data;
-  VerTabla2: Object;
-  VerTabla3: Object;
+  ValoresXY: getData.Data;
+  Rango1: Object;
+  Rango2: Object;
+  Coeficientes: Object;
+  Normalizados: Object;
 }
 const currenTable: DataTables = {
-  VerTabla1: [],
-  VerTabla2: [],
-  VerTabla3: [],
+  ValoresXY: [],
+  Rango1: [],
+  Rango2: [],
+  Coeficientes: [],
+  Normalizados: [],
 };
 
 // Envuelve la lógica en el evento 'DOMContentLoaded' para asegurar que el HTML está listo
@@ -55,9 +59,12 @@ function main(fm: number) {
   const dataAvarages = getData.xyAverage(valuesXYNormalized, dividor1);
   const dataAvarages2 = getData.xyAverage(valuesXYNormalized, divisor2);
 
-  currenTable.VerTabla1 = dataTable;
-  currenTable.VerTabla2 = dataAvarages;
-  currenTable.VerTabla3 = dataAvarages2;
+  // Guardar los datos en renderizado de tablas
+  currenTable.ValoresXY = dataTable;
+  currenTable.Rango1 = dataAvarages;
+  currenTable.Rango2 = dataAvarages2;
+  currenTable.Coeficientes = coefficient;
+  currenTable.Normalizados = valuesXYNormalized;
 
   const dataNormalized: ChartDataset = {
     label: "Y Normalizado",
@@ -67,14 +74,14 @@ function main(fm: number) {
   };
 
   const dataAverage1: ChartDataset = {
-    label: "Y Promedio",
+    label: "Rango 0.1",
     xValues: dataAvarages.xa,
     yValues: dataAvarages.yAverage,
     borderColor: "red",
   };
 
   const dataAverage2: ChartDataset = {
-    label: "Y Promedio",
+    label: "Rango 0.05",
     xValues: dataAvarages2.xa,
     yValues: dataAvarages2.yAverage,
     borderColor: "green",
@@ -87,10 +94,13 @@ function main(fm: number) {
   createChart(idAllGraph, [dataNormalized, dataAverage1, dataAverage2]);
 }
 
+//id de las tablas
 const dataTable = {
-  VerTabla1: "modal-1",
-  VerTabla2: "modal-2",
-  VerTabla3: "modal-3",
+  ValoresXY: "modal-1",
+  Rango1: "modal-2",
+  Rango2: "modal-3",
+  Coeficientes: "modal-4",
+  Normalizados: "modal-5",
 };
 
 //Lamada de los modales
@@ -118,7 +128,9 @@ closeBtn.forEach((btn) => {
   });
 });
 
-const modals = document.querySelectorAll(".modal") as NodeListOf<HTMLDialogElement>;
+const modals = document.querySelectorAll(
+  ".modal",
+) as NodeListOf<HTMLDialogElement>;
 modals.forEach((modal) => {
   modal.addEventListener("click", (event) => {
     if (event.target === modal) {
