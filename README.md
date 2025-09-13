@@ -1,6 +1,8 @@
 
 # Proyecto de Análisis de Datos por Rangos (Binning)
 
+-Enlace al proyecto: [https://lebuas.github.io/web-data-analysis/]
+
 Este proyecto es una **replicación en Typescrip de un análisis de datos hecho en Excel** utilizando la técnica de **agrupamiento por rangos o binning**.  
 El usuario ingresa únicamente un **factor de multiplicación de los coeficientes**, y el resto de los cálculos se realiza automáticamente.  
 El proyecto incluye **cuatro gráficos** que representan visualmente los resultados.
